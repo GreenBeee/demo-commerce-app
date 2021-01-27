@@ -1,0 +1,29 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3307/demoappdb?useSSL=false&allowPublicKeyRetrieval=true
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    database: mysql
+    hibernate:
+      ddl-auto: update
+server:
+  port: 8080
+
+---
+spring:
+  config:
+    activate:
+      on-profile: dev
+  datasource:
+    url: jdbc:mysql://demoapp-mysql:3306/demoappdb?useSSL=false&allowPublicKeyRetrieval=true
+    username: demouser
+    password: demopassword
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    database: mysql
+    hibernate:
+      ddl-auto: update
+server:
+  port: 8080

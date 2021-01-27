@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+
+  demoapp-mysql:
+    image: mysql:8.0
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=demoappdb
+      - MYSQL_USER=demouser
+      - MYSQL_PASSWORD=demopassword
+    ports:
+      - 3307:3306
+
+  demoapp-main:
+    build: ./
+    restart: on-failure
+    depends_on:
+      - demoapp-mysql
+    ports:
+      - 8080:8080
+    environment:
+      - DATABASE_HOST=demoapp-mysql
+      - DATABASE_USER=demouser
+      - DATABASE_PASSWORD=demopassword
+      - DATABASE_NAME=demoappdb
+      - DATABASE_PORT=3306
