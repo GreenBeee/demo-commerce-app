@@ -1,7 +1,6 @@
 package com.epam.demo.controller;
 
 import com.epam.demo.assembler.CategoryRepresentationModelAssembler;
-import com.epam.demo.assembler.ProductRepresentationModelAssembler;
 import com.epam.demo.dto.CategoryDTO;
 import com.epam.demo.entity.Category;
 import com.epam.demo.entity.Product;
@@ -92,7 +91,7 @@ public class CategoryController {
 	@DeleteMapping("/{categoryId}/product/{productId}")
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public ResponseEntity<RepresentationModel<CategoryModel>> removeProductFromCategory(@PathVariable Long categoryId,
-																				   @PathVariable Long productId) {
+																						@PathVariable Long productId) {
 		final Category category = getCategoryOrThrowException(categoryId);
 		final Product product = getProductOrThrowException(productId);
 		productService.removeCategory(product, category);
