@@ -11,7 +11,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
 import java.util.Optional;
 import java.util.Set;
 
@@ -35,7 +34,7 @@ public class ProductServiceImpl implements ProductService {
 	public Product createProduct(String name, String currency, double price, int quantity) {
 		if (!Currency.EUR.name().equals(currency)) {
 			double rateForCurrency = exchangeService.getRateForCurrency(Currency.EUR, currency);
-			price = price * rateForCurrency;
+			price = price / rateForCurrency;
 		}
 		price = Math.round(price * 100.0) / 100.0;
 		Product product = new Product();
@@ -49,7 +48,7 @@ public class ProductServiceImpl implements ProductService {
 	public void updateProduct(Product product, String name, String currency, double price, int quantity) {
 		if (!Currency.EUR.name().equals(currency)) {
 			double rateForCurrency = exchangeService.getRateForCurrency(Currency.EUR, currency);
-			price = price * rateForCurrency;
+			price = price / rateForCurrency;
 		}
 		price = Math.round(price * 100.0) / 100.0;
 		product.setName(name);
