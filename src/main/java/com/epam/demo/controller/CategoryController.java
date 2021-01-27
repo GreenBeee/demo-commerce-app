@@ -80,6 +80,7 @@ public class CategoryController {
 	}
 
 	@PostMapping("/{categoryId}/product/{productId}")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public ResponseEntity<RepresentationModel<CategoryModel>> addProductToCategory(@PathVariable Long categoryId,
 																				   @PathVariable Long productId) {
 		final Category category = getCategoryOrThrowException(categoryId);
@@ -89,6 +90,7 @@ public class CategoryController {
 	}
 
 	@DeleteMapping("/{categoryId}/product/{productId}")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public ResponseEntity<RepresentationModel<CategoryModel>> removeProductFromCategory(@PathVariable Long categoryId,
 																				   @PathVariable Long productId) {
 		final Category category = getCategoryOrThrowException(categoryId);
